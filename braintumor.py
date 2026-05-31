@@ -5,10 +5,7 @@ import numpy as np
 from joblib import load
 from PIL import Image, ImageTk
 
-
-
 model = load('ML/polynomial linear regression/Brain_tumor_model.joblib')
-
 
 root = Tk()
 root.title("Brain Tumor Detection")
@@ -32,7 +29,6 @@ def upload_image():
         img_pil.thumbnail((400, 400))  
         img_tk = ImageTk.PhotoImage(img_pil)
 
-
         image_label.config(image=img_tk)
         image_label.image = img_tk  
         image_label.place(x=100, y=175)
@@ -50,15 +46,11 @@ def predict():
     img_flattened = img_resized.flatten()  
     img_scaled = img_flattened / 255.0 
 
-
     prediction = model.predict(img_scaled.reshape(1, -1)) 
     result = "Tumor" if prediction[0] == 1 else "No Tumor"
-
  
     result_label.config(text=f"Prediction: {result}")
      
-
-
     img_pred_resized = cv2.resize(img_resized, (400, 300))  
     img_pred_pil = Image.fromarray(img_pred_resized)
     img_pred_tk = ImageTk.PhotoImage(img_pred_pil)
@@ -66,9 +58,6 @@ def predict():
     pred_image_label.config(image=img_pred_tk)
     pred_image_label.image = img_pred_tk  
     pred_image_label.place(x=650, y=175)
-
-
-
 
 heading = Label(root, text="Brain Tumor Detection", font="Corbel 25 bold", fg="black", bg="#d8e7d4")
 heading.pack(pady=20)
